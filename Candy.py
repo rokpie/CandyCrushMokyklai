@@ -1,3 +1,5 @@
-print("Hello World")
+int dimensijos = 8
+
+
 
 
