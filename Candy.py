@@ -1,11 +1,14 @@
-int dimensijos = 8
+dimensijos = 8
 
 board = []
 
 def board():
   for y in range(dimensijos):
     for x in range(dimensijos)
-      print(board[(y)*8 + x], end= (" "))
-    print()
+      i = ((y+x+1) % 2)
+      board.append(i)
+      print(i, end= (" "))
+  print()
 
+print(board)
 
