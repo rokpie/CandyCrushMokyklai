@@ -1,14 +1,14 @@
-dimensijos = 8
 
 lenta = []
 
-def board():
-  for y in range(dimensijos):
-    for x in range(dimensijos)
-      i = ((y+x+1) % 2)
-      lenta.append(i)
-      print(i, end= (" "))
-  print()
+lygiai = {lenta:[0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], "dimensions" : 4}
 
-board()
 
+def drawBoard(lygis):
+  for y in range(lygiai[lygis].dimensions):
+    for x in range(lygiai[lygis].dimensions):
+      print(lenta[(y)*8 + x], end= (" | "))
+    print()
+    print("-------------------------------")
+
+drawBoard(1)
