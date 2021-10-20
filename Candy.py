@@ -1,3 +1,4 @@
+# lygių masyvas kuriame yra visų lygių lentų reikšmės ir dimensijos.
 lygiai = [{'lenta':[0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions' : 4}, {'lenta':[0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions' : 4}]
 
 def drawBoard(lygis):
@@ -14,8 +15,12 @@ def drawBoard(lygis):
 level = int(input("Kurio nori lygio: ")) 
 drawBoard(level)
 
+
+# kvadratelių spalvos ir tų spalvų reiksmes
 oranzine = "o"
 melyna = "m"
 zalia = "z"
 raudona = "r"
+
+
 
