@@ -1,1 +1,6 @@
 https://pastebin.com/6cqEYTvZ
+
+drawBoard()
+judejimas()
+panaikinimas()
+ejimuPatrikimas()
