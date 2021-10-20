@@ -13,3 +13,9 @@ def drawBoard(lygis):
 
 level = int(input("Kurio nori lygio: ")) 
 drawBoard(level)
+
+oranzine = "o"
+melyna = "m"
+zalia = "z"
+raudona = "r"
+
