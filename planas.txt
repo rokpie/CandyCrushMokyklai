@@ -1,7 +1,12 @@
+4 IN A ROW LENTELES BRAIZYMAS
 https://pastebin.com/6cqEYTvZ
+RUŠIAVIMAS
 https://pastebin.com/pZge2t42
+SAVARANKIŠKAS DARBAS
 https://pastebin.com/9YTP1wiF
+STRUCT
 https://pastebin.com/hcH3i9ve
+STRUCT SU FUNKCIJA
 https://pastebin.com/VWwhEF2j
 
 drawBoard()
