@@ -1,4 +1,8 @@
 https://pastebin.com/6cqEYTvZ
+https://pastebin.com/pZge2t42
+https://pastebin.com/9YTP1wiF
+https://pastebin.com/hcH3i9ve
+https://pastebin.com/VWwhEF2j
 
 drawBoard()
 judejimas()
