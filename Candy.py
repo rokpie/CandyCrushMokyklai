@@ -3,6 +3,11 @@ lygiai = [
     {'lenta':[0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions' : 4}
   ]
 
+oranzine = "o"
+melyna = "m"
+zalia = "z"
+raudona = "r"
+
 def drawBoard():
   lygis  = level -1
   a = "---"
