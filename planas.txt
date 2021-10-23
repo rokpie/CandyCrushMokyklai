@@ -1,3 +1,4 @@
+mokytojo kodas --
 4 IN A ROW LENTELES BRAIZYMAS
 https://pastebin.com/6cqEYTvZ
 RUŠIAVIMAS
@@ -10,6 +11,7 @@ STRUCT
 https://pastebin.com/hcH3i9ve
 STRUCT SU FUNKCIJA
 https://pastebin.com/VWwhEF2j
+--
 
 
 drawBoard()
