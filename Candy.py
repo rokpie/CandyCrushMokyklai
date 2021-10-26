@@ -44,8 +44,8 @@ def ejimuPatikrinimas():
   for y in range(lygiai[(lygis)]['dimensions']):
     for x in range(lygiai[(lygis)]['dimensions']): 
       if not ((x == 0 and y == 0) or (x == lygiai[(lygis)]['dimensions']-1 and y == 0) or (y == lygiai[(lygis)]['dimensions']-1 and x == 0) or (y == lygiai[(lygis)]['dimensions']-1 and x == lygiai[(lygis)]['dimensions']-1)):
-        #patikrinam ar langeliai ne kampuos 
-        if(langelioTikrinimas(x, y-1) and langelioTikrinimas(x, y+1)): #patikrinam ar egzistuoja langelis 
+        #patikrinam ar langeliai ne kampuose
+        if(langelioTikrinimas(x, y-1) and langelioTikrinimas(x, y+1)): #patikrinam ar egzistuoja langeliai virsuje ir apacioje
             #Patikrinam ar langeliai virsuj ir apacioj tokie patys
             if(langelis(x, y-1) == langelis(x, y+1)):
                 spalva = langelis(x, y-1)
@@ -60,4 +60,5 @@ def ejimuPatikrinimas():
                     galimiEjimai.append([langelis(x, y+1), langelis(x,y)])
                 if (langelioTikrinimas(x, y-1) and langelis(x, y-1) == spalva):
                     galimiEjimai.append([langelis(x, y-1), langelis(x,y)])
+                    
             
