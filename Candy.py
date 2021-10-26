@@ -60,5 +60,5 @@ def ejimuPatikrinimas():
                     galimiEjimai.append([langelis(x, y+1), langelis(x,y)])
                 if (langelioTikrinimas(x, y-1) and langelis(x, y-1) == spalva):
                     galimiEjimai.append([langelis(x, y-1), langelis(x,y)])
-                    
+                
             
