@@ -64,20 +64,37 @@ def ejimuPatikrinimas():
                         if langelioTikrinimas(x, y-1) and langelis(x, y-1) == spalva:
                             galimiEjimai.append([langelis(x, y-1), langelis(x, y)])
                 # tikriname ar langeliai apacioje kaireje ir virsuje kaireje yra tokie patys kaip vidurinis ir desineje vidurinis langelis
-                if langelioTikrinimas(x-1, y-1) and langelioTikrinimas(x+1, y) and langelioTikrinimas(x-1, y+1):
-                    spalva = langelis(x,y)
-                    if langelis(x+1, y) == spalva:
-                        if langelis(x-1, y-1) == spalva:
+                if langelioTikrinimas(x+1, y):
+                    spalva = langelis(x, y)
+                    if langelioTikrinimas(x-1, y-1):
+                        if langelis(x+1, y) and langelis(x-1, y-1) == spalva:
                             galimiEjimai.append([langelis(x-1, y-1), langelis(x-1, y)])
-                        if langelis(x-1, y+1) == spalva:
-                            galimiEjimai.append([langelis(x-1, y+1, x-1, y)])
+                    if langelioTikrinimas(x-1, y+1):
+                        if langelis(x + 1, y) and langelis(x - 1, y + 1) == spalva:
+                            galimiEjimai.append([langelis(x - 1, y + 1), langelis(x - 1, y)])
                 # tikriname ar langeliai apacioje desineje ir virsuje desineje yra tokie patys kaip vidurinis ir kaireje vidurinis langelis
-                if langelioTikrinimas(x + 1, y - 1) and langelioTikrinimas(x - 1, y) and langelioTikrinimas(x + 1, y + 1):
-                    spalva = langelis(x,y)
-                    if langelis(x-1, y) == spalva:
-                        if langelis(x+1, y+1) == spalva:
+                if langelioTikrinimas(x-1, y):
+                    spalva = langelis(x, y)
+                    if langelioTikrinimas(x+1, y-1):
+                        if langelis(x-1, y) and langelis(x+1, y-1) == spalva:
+                            galimiEjimai.append([langelis(x+1, y-1), langelis(x+1, y)])
+                    if langelioTikrinimas(x + 1, y + 1):
+                        if langelis(x - 1, y) and langelis(x + 1, y + 1) == spalva:
                             galimiEjimai.append([langelis(x + 1, y + 1), langelis(x + 1, y)])
-                        if langelis(x + 1, y-1) == spalva:
-                            galimiEjimai.append([langelis(x + 1, y - 1), langelis(x + 1, y)])
-
+                if langelioTikrinimas(x, y-1):
+                    spalva = langelis(x, y)
+                    if langelioTikrinimas(x-1, y+1):
+                        if langelis(x, y-1) and langelis(x-1, y+1) == spalva:
+                            galimiEjimai.append([langelis(x-1, y + 1), langelis(x, y + 1)])
+                    if langelioTikrinimas(x+1, y+1):
+                        if langelis(x, y-1) and langelis(x+1, y+1) == spalva:
+                            galimiEjimai.append([langelis(x+1, y+1), langelis(x, y + 1)])
+                if langelioTikrinimas(x, y+1):
+                    spalva = langelis(x, y)
+                    if langelioTikrinimas(x-1, y-1):
+                        if langelis(x, y+1) and langelis(x-1, y-1) == spalva:
+                            galimiEjimai.append([langelis(x-1, y - 1), langelis(x, y - 1)])
+                    if langelioTikrinimas(x+1, y-1):
+                        if langelis(x, y+1) and langelis(x+1, y-1) == spalva:
+                            galimiEjimai.append([langelis(x+1, y-1), langelis(x, y - 1)])
 
