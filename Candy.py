@@ -1,6 +1,11 @@
-lygiai = [{'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
+lygiai = [{'lenta': ["o", "m", "z", "r", "o", "z", "r", "m", "m", "o", "z", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
 
 galimiEjimai = []
+
+oranzine = "o"
+melyna = "m"
+zalia = "z"
+raudona = "r"
 
 
 def langelis(x, y):
@@ -20,7 +25,7 @@ def drawBoard(lygis):
         print(a)
 
 
-level = int(input("Kurio nori lygio: ")) 
+level = int(input("Kurio nori lygio: "))
 drawBoard(level)
 
 
@@ -33,12 +38,6 @@ def langelioTikrinimas(x, y):   # nuskaitys y nuo 0 iki (dimensions -1) ir x nuo
             return False
     else:
         return False
-
-
-oranzine = "o"
-melyna = "m"
-zalia = "z"
-raudona = "r"
 
 
 def ejimuPatikrinimas():
@@ -98,3 +97,6 @@ def ejimuPatikrinimas():
                         if langelis(x, y+1) and langelis(x+1, y-1) == spalva:
                             galimiEjimai.append([langelis(x+1, y-1), langelis(x, y - 1)])
 
+
+ejimuPatikrinimas()
+print(galimiEjimai)
