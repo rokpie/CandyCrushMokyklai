@@ -1,6 +1,7 @@
 lygiai = [{'lenta': ["o", "m", "z", "r", "o", "z", "r", "m", "m", "o", "z", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
 
 galimiEjimai = []
+naikinamiL = []
 
 oranzine = "o"
 melyna = "m"
@@ -53,20 +54,20 @@ def ejimuPatikrinimas():
                         spalva = langelis(x, y-1)
                         if langelioTikrinimas(x+1, y):
                             if langelis(x+1, y) == spalva:
-                                galimiEjimai.append([(x,y), (x+1, y)])
+                                galimiEjimai.append([(x, y), (x+1, y)])
                         if langelioTikrinimas(x-1, y):
                             if langelis(x-1, y) == spalva:
-                                galimiEjimai.append([(x,y), (x-1, y)])
+                                galimiEjimai.append([(x, y), (x-1, y)])
                     if langelioTikrinimas(x+1, y) and langelioTikrinimas(x-1, y):
                         if langelis(x+1, y) == langelis(x-1, y):
                             spalva = langelis(x+1, y)
                             if langelioTikrinimas(x, y+1):
                                 print((x, y+1)) 
                                 if langelis(x, y+1) == spalva:
-                                    galimiEjimai.append([(x,y), (x, y+1)])
+                                    galimiEjimai.append([(x, y), (x, y+1)])
                             if langelioTikrinimas(x, y-1): 
                                 if langelis(x, y-1) == spalva:
-                                    galimiEjimai.append([(x,y), (x, y-1)])
+                                    galimiEjimai.append([(x, y), (x, y-1)])
                 # tikriname ar langeliai apacioje kaireje ir virsuje kaireje yra tokie patys kaip vidurinis ir desineje vidurinis langelis
                 spalva = langelis(x, y)
                 if langelioTikrinimas(x+1, y):  
@@ -98,6 +99,23 @@ def ejimuPatikrinimas():
                     if langelioTikrinimas(x+1, y-1):
                         if langelis(x, y+1) == langelis(x+1, y-1) == spalva:
                             galimiEjimai.append([(x+1, y-1), (x, y - 1)])
+
+
+def panaikinimas():
+    lygis = level - 1
+    naikinamiL.clear()
+    for y in range(lygiai[lygis]['dimensions']):
+        for x in range(lygiai[lygis]['dimensions']):
+            if not ((x == 0 and y == 0) or (x == lygiai[lygis]['dimensions'] - 1 and y == 0) or (y == lygiai[lygis]['dimensions'] - 1 and x == 0) or (y == lygiai[lygis]['dimensions'] - 1 and x == lygiai[lygis]['dimensions'] - 1)):
+                spalva = langelis(x, y)
+                if langelioTikrinimas(x+1, y):
+                    if langelioTikrinimas(x-1, y):
+                        if langelis(x+1, y) == langelis(x-1, y) == spalva:
+                            naikinamiL.append([(x-1, y), (x, y), (x+1, y)])
+                if langelioTikrinimas(x, y+1):
+                    if langelioTikrinimas(x, y-1):
+                        if langelis(x, y+1) == langelis(x, y-1) == spalva:
+                            naikinamiL.append([(x, y-1), (x, y), (x, y+1)])
 
 
 ejimuPatikrinimas()
