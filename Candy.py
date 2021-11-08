@@ -1,3 +1,4 @@
+from random import randint
 lygiai = [{'lenta': ["m", "o", "z", "r", "o", "z", "r", "m", "m", "m", "m", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
 
 galimiEjimai = []
@@ -10,7 +11,18 @@ raudona = "r"
 
 
 def tileGenerate(x, y):
-    tile = 1
+    lygis = level - 1
+    tile = lygiai[lygis]['lenta'][arrayPos(x, y)]
+    tilenum = randint(1, 4)
+    if tilenum == 1:
+        tile = oranzine
+    if tilenum == 2:
+        tile = melyna
+    if tilenum == 3:
+        tile = zalia
+    if tilenum == 4:
+        tile = raudona
+    lygiai[lygis]['lenta'][arrayPos(x, y)] = tile
     return tile
 
 
@@ -144,6 +156,7 @@ def panaikinimas():
                             lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
 
 
+
 ejimuPatikrinimas()
 panaikinimas()
-drawBoard(1)
+
