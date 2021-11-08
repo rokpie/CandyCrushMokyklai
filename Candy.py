@@ -1,4 +1,4 @@
-lygiai = [{'lenta': ["o", "o", "o", "r", "o", "z", "r", "m", "m", "o", "z", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
+lygiai = [{'lenta': ["m", "o", "z", "r", "o", "z", "r", "m", "m", "m", "m", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
 
 galimiEjimai = []
 naikinamiL = []
@@ -7,6 +7,22 @@ oranzine = "o"
 melyna = "m"
 zalia = "z"
 raudona = "r"
+
+
+def tileGenerate(x, y):
+    tile = 1
+    return tile
+
+
+def arrayPos(x, y):
+    lygis = level - 1
+    if x == 0 and y != 0:
+        pos = y*lygiai[lygis]["dimensions"]
+    if x != 0 and y == 0:
+        pos = x
+    else:
+        pos = y*lygiai[lygis]["dimensions"] + x
+    return pos
 
 
 def langelis(x, y):
@@ -63,7 +79,6 @@ def ejimuPatikrinimas():
                         if langelis(x+1, y) == langelis(x-1, y):  # jeigu abu langeliai lygūs:
                             spalva = langelis(x+1, y)
                             if langelioTikrinimas(x, y+1):  # jeigu langelis virsuje egzistuoja:
-                                print((x, y+1)) 
                                 if langelis(x, y+1) == spalva:  # jeigu langelis yra toks pat, galimas ejimas:
                                     galimiEjimai.append([(x, y), (x, y+1)])
                             if langelioTikrinimas(x, y-1):      # jeigu langelis apacioje egzistuoja:
@@ -107,32 +122,28 @@ def ejimuPatikrinimas():
 def panaikinimas():
     lygis = level - 1
     naikinamiL.clear()
-    lyg = lygiai[lygis]['lenta']
     # praeinam pro visa lenta:
     for y in range(lygiai[lygis]['dimensions']):
         for x in range(lygiai[lygis]['dimensions']):
             # jeigu tikrinami langeliai ne kampuose:
             if not ((x == 0 and y == 0) or (x == lygiai[lygis]['dimensions'] - 1 and y == 0) or (y == lygiai[lygis]['dimensions'] - 1 and x == 0) or (y == lygiai[lygis]['dimensions'] - 1 and x == lygiai[lygis]['dimensions'] - 1)):
                 spalva = langelis(x, y)
-                # jeigu trys langeliai horizontaliai yra tokie patys, juos galima naikinti
+                # jeigu trys langeliai horizontaliai yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
                 if langelioTikrinimas(x+1, y):
                     if langelioTikrinimas(x-1, y):
                         if langelis(x+1, y) == langelis(x-1, y) == spalva:
-                            naikinamiL.append(langelis(x-1, y))
-                            naikinamiL.append(langelis(x, y))
-                            naikinamiL.append(langelis(x + 1, y))
-                # jeigu trys langeliai vertikalia yra tokie patys, juos galima naikinti
+                            lygiai[lygis]['lenta'][arrayPos(x-1, y)] = " "
+                            lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
+                            lygiai[lygis]['lenta'][arrayPos(x+1, y)] = " "
+                # jeigu trys langeliai vertikalia yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
                 if langelioTikrinimas(x, y+1):
                     if langelioTikrinimas(x, y-1):
                         if langelis(x, y+1) == langelis(x, y-1) == spalva:
-                            naikinamiL.append(langelis(x, y-1))
-                            naikinamiL.append(langelis(x, y))
-                            naikinamiL.append(langelis(x, y + 1))
-    for i in naikinamiL:
-        if i in lygiai[lygis]['lenta']:
-            lygiai[lygis]['lenta'].remove(i)
-        print(lygiai[lygis]['lenta'])
+                            lygiai[lygis]['lenta'][arrayPos(x, y-1)] = " "
+                            lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
+                            lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
 
 
 ejimuPatikrinimas()
 panaikinimas()
+drawBoard(1)
