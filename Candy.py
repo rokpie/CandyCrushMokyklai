@@ -2,7 +2,6 @@ from random import randint
 lygiai = [{'lenta': ["m", "o", "z", "r", "o", "z", "r", "m", "m", "m", "m", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
 
 galimiEjimai = []
-naikinamiL = []
 
 oranzine = "o"
 melyna = "m"
@@ -11,6 +10,7 @@ raudona = "r"
 
 
 def tileGenerate(x, y):
+    # funkcija skirta sugeneruoti nauja tile tam tikrame laukelyje
     lygis = level - 1
     tile = lygiai[lygis]['lenta'][arrayPos(x, y)]
     tilenum = randint(1, 4)
@@ -26,7 +26,22 @@ def tileGenerate(x, y):
     return tile
 
 
+def kritimas():
+    # funkcija skirta langeliu sukritimui, kai po jais yra tuščios vietos
+    lygis = level - 1
+    for y in range(lygiai[lygis]['dimensions']):
+        for x in range(lygiai[lygis]['dimensions']):
+            # kai tikrinimas langelis tuscias ir virsutinis langelis egzistuoja:
+            if langelis(x, y) == " " and langelioTikrinimas(x, y-1):
+                a = langelis(x, y)
+                b = langelis(x, y-1)
+                # sukeiciam abieju langeliu reiksmes
+                lygiai[lygis]['lenta'][arrayPos(x, y - 1)] = a
+                lygiai[lygis]['lenta'][arrayPos(x, y)] = b
+
+
 def arrayPos(x, y):
+    # funkcija skirta gauti lentos array pozicija naudojant x ir y koordinates
     lygis = level - 1
     if x == 0 and y != 0:
         pos = y*lygiai[lygis]["dimensions"]
@@ -38,11 +53,13 @@ def arrayPos(x, y):
 
 
 def langelis(x, y):
+    # funkcija skirta gauti langelio reiksme tam tikroje lentos vietoje
     lygis = level - 1
     return lygiai[lygis]['lenta'][y*lygiai[lygis]['dimensions'] + x]
 
 
 def drawBoard(lygis):
+    # funkcija skirta nupiesti lenta
     lygis = lygis - 1
     a = "---"
     for i in range((lygiai[lygis]['dimensions'])-1):
@@ -59,6 +76,7 @@ drawBoard(level)
 
 
 def langelioTikrinimas(x, y):   # nuskaitys y nuo 0 iki (dimensions -1) ir x nuo 0 iki (dimensions -1)
+    # funkcija skirta patikrinti ar duotas langelis egzistuoja
     lygis = level - 1
     # patikrina, ar tikrinamas langelis egzistuoja
     if 0 <= y < lygiai[lygis]['dimensions']:
@@ -71,6 +89,7 @@ def langelioTikrinimas(x, y):   # nuskaitys y nuo 0 iki (dimensions -1) ir x nuo
 
 
 def ejimuPatikrinimas():
+    # daugybe ifu tam, kad patikrinti ar yra galimu ejimu
     lygis = level - 1
     galimiEjimai.clear()
     # praeinam pro visą lentą su dviem for loops:
@@ -133,7 +152,6 @@ def ejimuPatikrinimas():
 
 def panaikinimas():
     lygis = level - 1
-    naikinamiL.clear()
     # praeinam pro visa lenta:
     for y in range(lygiai[lygis]['dimensions']):
         for x in range(lygiai[lygis]['dimensions']):
@@ -156,7 +174,7 @@ def panaikinimas():
                             lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
 
 
-
 ejimuPatikrinimas()
 panaikinimas()
-
+kritimas()
+drawBoard(1)
