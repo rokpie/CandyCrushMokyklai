@@ -1,6 +1,8 @@
 from random import randint
 lygiai = [{'lenta': ["m", "o", "z", "r", "o", "z", "r", "m", "m", "m", "m", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
 
+# per lenta einam nuo virsaus i apacia
+
 galimiEjimai = []
 
 oranzine = "o"
@@ -27,17 +29,23 @@ def tileGenerate(x, y):
 
 
 def kritimas():
-    # funkcija skirta langeliu sukritimui, kai po jais yra tuščios vietos
+    # funkcija skirta tam, kad po panaikinimo kristu langeliai
     lygis = level - 1
-    for y in range(lygiai[lygis]['dimensions']):
-        for x in range(lygiai[lygis]['dimensions']):
-            # kai tikrinimas langelis tuscias ir virsutinis langelis egzistuoja:
-            if langelis(x, y) == " " and langelioTikrinimas(x, y-1):
-                a = langelis(x, y)
-                b = langelis(x, y-1)
-                # sukeiciam abieju langeliu reiksmes
-                lygiai[lygis]['lenta'][arrayPos(x, y - 1)] = a
-                lygiai[lygis]['lenta'][arrayPos(x, y)] = b
+    # kokios dimensijos -1, tiek kartu ir tikrinsim ar reikia, kad kristu
+    for i in range(lygiai[lygis]['dimensions'] - 1):
+        # praeinam pro visa lenta
+        for y in range(lygiai[lygis]['dimensions']):
+            for x in range(lygiai[lygis]['dimensions']):
+                # kai apatinis langelis egzistuoja ir yra tuscias:
+                if langelioTikrinimas(x, y+1) and langelis(x, y+1) == " ":
+                    a = langelis(x, y)
+                    b = langelis(x, y+1)
+                    # sukeiciam abieju langeliu reiksmes, kad virsutiniai langeliai nusileistu zemyn
+                    lygiai[lygis]['lenta'][arrayPos(x, y + 1)] = a
+                    lygiai[lygis]['lenta'][arrayPos(x, y)] = b
+                    # print()
+                    # drawBoard(1)
+                    # print()
 
 
 def arrayPos(x, y):
