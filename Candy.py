@@ -160,6 +160,13 @@ def ejimuPatikrinimas():
 
 def judejimas(x, y, x1, y1):
     lygis = level - 1
+    if langelioTikrinimas(x, y) and langelioTikrinimas(x1, y1):
+        if ([(x, y), (x1, y1)]) in galimiEjimai:
+            temp = langelis(x, y)
+            temp1 = langelis(x1, y1)
+            lygiai[lygis]['lenta'][arrayPos(x, y)] = temp1
+            lygiai[lygis]['lenta'][arrayPos(x1, y1)] = temp
+
 
 
 def panaikinimas():
@@ -187,7 +194,12 @@ def panaikinimas():
 
 
 ejimuPatikrinimas()
-panaikinimas()
-kritimas()
 print(galimiEjimai)
+judejimas(2, 1, 3, 1)
 drawBoard(1)
+panaikinimas()
+drawBoard(1)
+kritimas()
+drawBoard(1)
+
+
