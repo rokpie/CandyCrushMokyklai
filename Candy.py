@@ -87,8 +87,6 @@ def drawBoard(lygis):
         print(a)
 
 
-
-
 level = int(input("Kurio nori lygio: "))
 drawBoard(level)
 
