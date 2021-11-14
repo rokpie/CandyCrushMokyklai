@@ -70,13 +70,23 @@ def drawBoard(lygis):
     # funkcija skirta nupiesti lenta
     lygis = lygis - 1
     a = "---"
-    for i in range((lygiai[lygis]['dimensions'])-1):
-        a = a+"----"
+    for i in range((lygiai[lygis]['dimensions'])):
+        a = a+"---"
+        # printiname x kordinates
+        print(i, end="   ")
     for y in range(lygiai[lygis]['dimensions']):
+        # po x koordinaciu printinimo isprintiname tuscia line kad butu tvarkinga
+        if y == 0:
+            print()
         for x in range(lygiai[lygis]['dimensions']):
+            # printiname visus tiles
             print(lygiai[lygis]['lenta'][y*(lygiai[lygis]['dimensions']) + x], end=" | ")
-        print()
+        # printiname y koordinates
+        print(y)
+        # printiname bruksniukus tarp langelių eilių
         print(a)
+
+
 
 
 level = int(input("Kurio nori lygio: "))
@@ -160,13 +170,17 @@ def ejimuPatikrinimas():
 
 def judejimas(x, y, x1, y1):
     lygis = level - 1
+    # jeigu abu parasyti langeliai egzistuoja:
     if langelioTikrinimas(x, y) and langelioTikrinimas(x1, y1):
+        # jeigu abu langeliai yra galimu ejimu liste:
         if ([(x, y), (x1, y1)]) in galimiEjimai:
             temp = langelis(x, y)
             temp1 = langelis(x1, y1)
+            # apkeiciam langeliu reiksmes
             lygiai[lygis]['lenta'][arrayPos(x, y)] = temp1
             lygiai[lygis]['lenta'][arrayPos(x1, y1)] = temp
-
+            # panaikinam langeliu koordinates is galimu ejimu listo
+            galimiEjimai.remove([(x, y), (x1, y1)])
 
 
 def panaikinimas():
@@ -184,7 +198,7 @@ def panaikinimas():
                             lygiai[lygis]['lenta'][arrayPos(x-1, y)] = " "
                             lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
                             lygiai[lygis]['lenta'][arrayPos(x+1, y)] = " "
-                # jeigu trys langeliai vertikalia yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
+                # jeigu trys langeliai vertikaliai yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
                 if langelioTikrinimas(x, y+1):
                     if langelioTikrinimas(x, y-1):
                         if langelis(x, y+1) == langelis(x, y-1) == spalva:
@@ -195,11 +209,6 @@ def panaikinimas():
 
 ejimuPatikrinimas()
 print(galimiEjimai)
-judejimas(2, 1, 3, 1)
+judejimas(int(input("Ivesk langelio, kuri nori pajudinti x koordinate: ")), int(input("Ivesk langelio, kuri nori pajudinti y koordinate: ")), int(input("Ivesk langelio, į kurį nori judėti x koordinate: ")), int(input("Ivesk langelio, į kurį norijudėti y koordinate: ")))
+print(galimiEjimai)
 drawBoard(1)
-panaikinimas()
-drawBoard(1)
-kritimas()
-drawBoard(1)
-
-
