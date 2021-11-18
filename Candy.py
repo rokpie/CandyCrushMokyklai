@@ -1,5 +1,5 @@
 from random import randint
-lygiai = [{'lenta': ["m", "o", "z", "r", "o", "z", "r", "m", "m", "m", "m", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], 'dimensions': 4}]
+lygiai = [{'lenta': ["m", "o", "z", "r", "o", "z", "r", "m", "m", "m", "m", "r", "r", "m", "m", "o"], 'dimensions': 4}, {'lenta': ["o", "o", "z", "r", "m", "z", "o", "m", "o", "o", "r", "r", "m", "r", "z", "z", "r"], 'dimensions': 4}]
 
 # per lenta einam nuo virsaus i apacia
 
@@ -10,60 +10,10 @@ melyna = "m"
 zalia = "z"
 raudona = "r"
 
+score = 0
 
-def tileGenerate(x, y):
-    # funkcija skirta sugeneruoti nauja tile tam tikrame laukelyje
-    lygis = level - 1
-    tile = lygiai[lygis]['lenta'][arrayPos(x, y)]
-    tilenum = randint(1, 4)
-    if tilenum == 1:
-        tile = oranzine
-    if tilenum == 2:
-        tile = melyna
-    if tilenum == 3:
-        tile = zalia
-    if tilenum == 4:
-        tile = raudona
-    lygiai[lygis]['lenta'][arrayPos(x, y)] = tile
-    return tile
-
-
-def kritimas():
-    # funkcija skirta tam, kad po panaikinimo kristu langeliai
-    lygis = level - 1
-    # kokios dimensijos -1, tiek kartu ir tikrinsim ar reikia, kad kristu
-    for i in range(lygiai[lygis]['dimensions'] - 1):
-        # praeinam pro visa lenta
-        for y in range(lygiai[lygis]['dimensions']):
-            for x in range(lygiai[lygis]['dimensions']):
-                # kai apatinis langelis egzistuoja ir yra tuscias:
-                if langelioTikrinimas(x, y+1) and langelis(x, y+1) == " ":
-                    a = langelis(x, y)
-                    b = langelis(x, y+1)
-                    # sukeiciam abieju langeliu reiksmes, kad virsutiniai langeliai nusileistu zemyn
-                    lygiai[lygis]['lenta'][arrayPos(x, y + 1)] = a
-                    lygiai[lygis]['lenta'][arrayPos(x, y)] = b
-                    # print()
-                    # drawBoard(1)
-                    # print()
-
-
-def arrayPos(x, y):
-    # funkcija skirta gauti lentos array pozicija naudojant x ir y koordinates
-    lygis = level - 1
-    if x == 0 and y != 0:
-        pos = y*lygiai[lygis]["dimensions"]
-    if x != 0 and y == 0:
-        pos = x
-    else:
-        pos = y*lygiai[lygis]["dimensions"] + x
-    return pos
-
-
-def langelis(x, y):
-    # funkcija skirta gauti langelio reiksme tam tikroje lentos vietoje
-    lygis = level - 1
-    return lygiai[lygis]['lenta'][y*lygiai[lygis]['dimensions'] + x]
+level = int(input("Kurio nori lygio: "))
+lygis = level - 1
 
 
 def drawBoard(lygis):
@@ -87,8 +37,63 @@ def drawBoard(lygis):
         print(a)
 
 
-level = int(input("Kurio nori lygio: "))
 drawBoard(level)
+
+
+def tileGenerate(x, y):
+    # funkcija skirta sugeneruoti nauja tile tam tikrame laukelyje
+    lygis = level - 1
+    tile = lygiai[lygis]['lenta'][arrayPos(x, y)]
+    tilenum = randint(1, 4)
+    if tilenum == 1:
+        tile = oranzine
+    if tilenum == 2:
+        tile = melyna
+    if tilenum == 3:
+        tile = zalia
+    if tilenum == 4:
+        tile = raudona
+    lygiai[lygis]['lenta'][arrayPos(x, y)] = tile
+    return tile
+
+
+def shuffle():
+    lygis = level - 1
+
+
+def kritimas():
+    # funkcija skirta tam, kad po panaikinimo kristu langeliai
+    lygis = level - 1
+    # kokios dimensijos -1, tiek kartu ir tikrinsim ar reikia, kad kristu
+    for i in range(lygiai[lygis]['dimensions'] - 1):
+        # praeinam pro visa lenta
+        for y in range(lygiai[lygis]['dimensions']):
+            for x in range(lygiai[lygis]['dimensions']):
+                # kai apatinis langelis egzistuoja ir yra tuscias:
+                if langelioTikrinimas(x, y+1) and langelis(x, y+1) == " ":
+                    a = langelis(x, y)
+                    b = langelis(x, y+1)
+                    # sukeiciam abieju langeliu reiksmes, kad virsutiniai langeliai nusileistu zemyn
+                    lygiai[lygis]['lenta'][arrayPos(x, y + 1)] = a
+                    lygiai[lygis]['lenta'][arrayPos(x, y)] = b
+
+
+def arrayPos(x, y):
+    # funkcija skirta gauti lentos array pozicija naudojant x ir y koordinates
+    lygis = level - 1
+    if x == 0 and y != 0:
+        pos = y*lygiai[lygis]["dimensions"]
+    if x != 0 and y == 0:
+        pos = x
+    else:
+        pos = y*lygiai[lygis]["dimensions"] + x
+    return pos
+
+
+def langelis(x, y):
+    # funkcija skirta gauti langelio reiksme tam tikroje lentos vietoje
+    lygis = level - 1
+    return lygiai[lygis]['lenta'][y*lygiai[lygis]['dimensions'] + x]
 
 
 def langelioTikrinimas(x, y):   # nuskaitys y nuo 0 iki (dimensions -1) ir x nuo 0 iki (dimensions -1)
@@ -112,7 +117,7 @@ def ejimuPatikrinimas():
     for y in range(lygiai[lygis]['dimensions']):
         for x in range(lygiai[lygis]['dimensions']):
             # jeigu tikrinami langeliai ne kampuose:
-            if not ((x == 0 and y == 0) or (x == lygiai[lygis]['dimensions']-1 and y == 0) or (y == lygiai[lygis]['dimensions']-1 and x == 0) or (y == lygiai[lygis]['dimensions']-1 and x == lygiai[lygis]['dimensions']-1)):
+            if not ((langelis(x, y) == " ") or (x == 0 and y == 0) or (x == lygiai[lygis]['dimensions']-1 and y == 0) or (y == lygiai[lygis]['dimensions']-1 and x == 0) or (y == lygiai[lygis]['dimensions']-1 and x == lygiai[lygis]['dimensions']-1)):
                 if langelioTikrinimas(x, y-1) and langelioTikrinimas(x, y+1):   # jeigui egzistuoja langeliai virsuje ir apacioje:
                     if langelis(x, y-1) == langelis(x, y+1):  # jeigu langeliai virsuje ir apacioje yra tokie patys:
                         spalva = langelis(x, y-1)
@@ -188,25 +193,44 @@ def panaikinimas():
         for x in range(lygiai[lygis]['dimensions']):
             # jeigu tikrinami langeliai ne kampuose:
             if not ((x == 0 and y == 0) or (x == lygiai[lygis]['dimensions'] - 1 and y == 0) or (y == lygiai[lygis]['dimensions'] - 1 and x == 0) or (y == lygiai[lygis]['dimensions'] - 1 and x == lygiai[lygis]['dimensions'] - 1)):
-                spalva = langelis(x, y)
-                # jeigu trys langeliai horizontaliai yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
-                if langelioTikrinimas(x+1, y):
-                    if langelioTikrinimas(x-1, y):
-                        if langelis(x+1, y) == langelis(x-1, y) == spalva:
-                            lygiai[lygis]['lenta'][arrayPos(x-1, y)] = " "
-                            lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
-                            lygiai[lygis]['lenta'][arrayPos(x+1, y)] = " "
-                # jeigu trys langeliai vertikaliai yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
-                if langelioTikrinimas(x, y+1):
-                    if langelioTikrinimas(x, y-1):
-                        if langelis(x, y+1) == langelis(x, y-1) == spalva:
-                            lygiai[lygis]['lenta'][arrayPos(x, y-1)] = " "
-                            lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
-                            lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
+                if langelis(x, y) != " ":
+                    spalva = langelis(x, y)
+                    # jeigu trys langeliai horizontaliai yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
+                    if langelioTikrinimas(x+1, y):
+                        if langelioTikrinimas(x-1, y):
+                            if langelis(x+1, y) == langelis(x-1, y) == spalva:
+                                lygiai[lygis]['lenta'][arrayPos(x-1, y)] = " "
+                                lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
+                                lygiai[lygis]['lenta'][arrayPos(x+1, y)] = " "
+                    # jeigu trys langeliai vertikaliai yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
+                    if langelioTikrinimas(x, y+1):
+                        if langelioTikrinimas(x, y-1):
+                            if langelis(x, y+1) == langelis(x, y-1) == spalva:
+                                lygiai[lygis]['lenta'][arrayPos(x, y-1)] = " "
+                                lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
+                                lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
 
 
 ejimuPatikrinimas()
-print(galimiEjimai)
-judejimas(int(input("Ivesk langelio, kuri nori pajudinti x koordinate: ")), int(input("Ivesk langelio, kuri nori pajudinti y koordinate: ")), int(input("Ivesk langelio, į kurį nori judėti x koordinate: ")), int(input("Ivesk langelio, į kurį norijudėti y koordinate: ")))
-print(galimiEjimai)
-drawBoard(1)
+while score < 100:
+    while galimiEjimai != []:
+        ejimuPatikrinimas()
+        print(galimiEjimai)
+        judejimas(int(input("Ivesk langelio, kuri nori pajudinti x koordinate: ")), int(input("Ivesk langelio, kuri nori pajudinti y koordinate: ")), int(input("Ivesk langelio, į kurį nori judėti x koordinate: ")), int(input("Ivesk langelio, į kurį norijudėti y koordinate: ")))
+        panaikinimas()
+        kritimas()
+        drawBoard(level)
+    if galimiEjimai == []:
+        if " " in lygiai[lygis]['lenta']:
+            for y in range(lygiai[lygis]['dimensions']):
+                for x in range(lygiai[lygis]['dimensions']):
+                    if langelis(x, y) == " ":
+                        tileGenerate(x, y)
+        ejimuPatikrinimas()
+        drawBoard(level)
+    # kiekvienam tusciam elementui generuojame naujus langelius su tile generate
+    # jeigu sugeneruojame naujus langelius ir ejimu nebera, turime shufflinti langelius taip kad gautusi nors 1 ejimas.
+if score >= 100:
+    print("You completed the level!")
+
+
