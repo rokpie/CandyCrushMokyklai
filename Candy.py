@@ -138,6 +138,22 @@ def ejimuPatikrinimas():
                                     galimiEjimai.append([(x, y-1), (x, y)])
                 # toliau tikrinama ar langeliai kairėje apacioje ir kaireje virsuje egzistuoja ir ar yra lygūs centriniui ir desinėje viduryje esanciam langeliui:
                 spalva = langelis(x, y)
+                if langelioTikrinimas(x, y+1):
+                    if langelioTikrinimas(x, y-2):
+                        if langelis(x, y+1) == langelis(x, y-2) == spalva:
+                            galimiEjimai.append([(x, y-2), (x, y-1)])
+                if langelioTikrinimas(x, y-1):
+                    if langelioTikrinimas(x, y+2):
+                        if langelis(x, y-1) == langelis(x, y+2) == spalva:
+                            galimiEjimai.append([(x, y+2), (x, y+1)])
+                if langelioTikrinimas(x+1, y):
+                    if langelioTikrinimas(x-2, y):
+                        if langelis(x+1, y) == langelis(x-2, y) == spalva:
+                            galimiEjimai.append([(x-2, y), (x-1, y)])
+                if langelioTikrinimas(x-1, y):
+                    if langelioTikrinimas(x+2, y):
+                        if langelis(x-1, y) == langelis(x+2, y) == spalva:
+                            galimiEjimai.append([(x+2, y), (x+1, y)])
                 if langelioTikrinimas(x+1, y):  # jeigu desineje viduryje langelis egzistuoja:
                     if langelioTikrinimas(x-1, y-1):
                         if langelis(x+1, y) == langelis(x-1, y-1) == spalva:
@@ -210,15 +226,15 @@ def panaikinimas():
                                 lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
                                 lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
 
-
 ejimuPatikrinimas()
+print(galimiEjimai)
 while score < 100:
     while galimiEjimai != []:
-        ejimuPatikrinimas()
-        print(galimiEjimai)
         judejimas(int(input("Ivesk langelio, kuri nori pajudinti x koordinate: ")), int(input("Ivesk langelio, kuri nori pajudinti y koordinate: ")), int(input("Ivesk langelio, į kurį nori judėti x koordinate: ")), int(input("Ivesk langelio, į kurį norijudėti y koordinate: ")))
         panaikinimas()
         kritimas()
+        ejimuPatikrinimas()
+        print(galimiEjimai)
         drawBoard(level)
     if galimiEjimai == []:
         if " " in lygiai[lygis]['lenta']:
@@ -228,7 +244,6 @@ while score < 100:
                         tileGenerate(x, y)
         ejimuPatikrinimas()
         drawBoard(level)
-    # kiekvienam tusciam elementui generuojame naujus langelius su tile generate
     # jeigu sugeneruojame naujus langelius ir ejimu nebera, turime shufflinti langelius taip kad gautusi nors 1 ejimas.
 if score >= 100:
     print("You completed the level!")
