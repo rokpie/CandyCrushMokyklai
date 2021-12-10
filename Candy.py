@@ -15,7 +15,6 @@ score = 0
 level = int(input("Kurio nori lygio: "))
 lygis = level - 1
 
-
 def drawBoard(lygis):
     # funkcija skirta nupiesti lenta
     lygis = lygis - 1
@@ -55,11 +54,6 @@ def tileGenerate(x, y):
         tile = raudona
     lygiai[lygis]['lenta'][arrayPos(x, y)] = tile
     return tile
-
-
-def shuffle():
-    lygis = level - 1
-
 
 def kritimas():
     # funkcija skirta tam, kad po panaikinimo kristu langeliai
@@ -219,6 +213,7 @@ def judejimas(x, y, x1, y1):
 
 
 def panaikinimas():
+    global score
     lygis = level - 1
     # praeinam pro visa lenta:
     for y in range(lygiai[lygis]['dimensions']):
@@ -234,6 +229,7 @@ def panaikinimas():
                                 lygiai[lygis]['lenta'][arrayPos(x-1, y)] = " "
                                 lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
                                 lygiai[lygis]['lenta'][arrayPos(x+1, y)] = " "
+                                score += 10
                     # jeigu trys langeliai vertikaliai yra tokie patys, juos galima sunaikinti t.y. palikti tuscia vieta
                     if langelioTikrinimas(x, y+1):
                         if langelioTikrinimas(x, y-1):
@@ -241,6 +237,7 @@ def panaikinimas():
                                 lygiai[lygis]['lenta'][arrayPos(x, y-1)] = " "
                                 lygiai[lygis]['lenta'][arrayPos(x, y)] = " "
                                 lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
+                                score += 10
 
 ejimuPatikrinimas()
 print(galimiEjimai)
@@ -250,18 +247,23 @@ while score < 100:
         panaikinimas()
         kritimas()
         ejimuPatikrinimas()
-        print(galimiEjimai)
         drawBoard(level)
-    if galimiEjimai == []:
+        print("The score is :" + " "+str(score))
+        print(galimiEjimai)
+    while galimiEjimai == []:
         if " " in lygiai[lygis]['lenta']:
             for y in range(lygiai[lygis]['dimensions']):
                 for x in range(lygiai[lygis]['dimensions']):
                     if langelis(x, y) == " ":
-                        tileGenerate(x, y)
+                        tileGenerate(x, y)  
+        if " " not in lygiai[lygis]['lenta']:
+          for y in range(lygiai[lygis]['dimensions']):
+                for x in range(lygiai[lygis]['dimensions']):
+                    tileGenerate(x, y)
+        panaikinimas()
+        kritimas()
         ejimuPatikrinimas()
         drawBoard(level)
-    # jeigu sugeneruojame naujus langelius ir ejimu nebera, turime shufflinti langelius taip kad gautusi nors 1 ejimas.
+        print(galimiEjimai)
 if score >= 100:
     print("You completed the level!")
-
-
