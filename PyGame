@@ -1,5 +1,5 @@
 import sys, pygame
-pygame.init
+pygame.init()
 
 size = widhth, height = 800, 800
 
