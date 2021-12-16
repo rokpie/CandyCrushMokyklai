@@ -1,1 +1,6 @@
+import sys, pygame
+pygame.init
+
+size = widhth, height = 800, 800
+
 
