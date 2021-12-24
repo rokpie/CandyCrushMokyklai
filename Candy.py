@@ -36,7 +36,7 @@ def drawBoard(lygis):
         print(a)
 
 
-drawBoard(level)
+# drawBoard(level)
 
 
 def tileGenerate(x, y):
@@ -239,31 +239,31 @@ def panaikinimas():
                                 lygiai[lygis]['lenta'][arrayPos(x, y+1)] = " "
                                 score += 10
 
-ejimuPatikrinimas()
-print(galimiEjimai)
-while score < 100:
-    while galimiEjimai != []:
-        judejimas(int(input("Ivesk langelio x koordinate: ")), int(input("Ivesk langelio y koordinate: ")), int(input("Ivesk langelio x koordinate: ")), int(input("Ivesk langelio y koordinate: ")))
-        panaikinimas()
-        kritimas()
-        ejimuPatikrinimas()
-        drawBoard(level)
-        print("The score is :" + " "+str(score))
-        print(galimiEjimai)
-    while galimiEjimai == []:
-        if " " in lygiai[lygis]['lenta']:
-            for y in range(lygiai[lygis]['dimensions']):
-                for x in range(lygiai[lygis]['dimensions']):
-                    if langelis(x, y) == " ":
-                        tileGenerate(x, y)  
-        if " " not in lygiai[lygis]['lenta']:
-          for y in range(lygiai[lygis]['dimensions']):
-                for x in range(lygiai[lygis]['dimensions']):
-                    tileGenerate(x, y)
-        panaikinimas()
-        kritimas()
-        ejimuPatikrinimas()
-        drawBoard(level)
-        print(galimiEjimai)
-if score >= 100:
-    print("You completed the level!")
+# ejimuPatikrinimas()
+# print(galimiEjimai)
+# while score < 100:
+#     while galimiEjimai != []:
+#         judejimas(int(input("Ivesk langelio x koordinate: ")), int(input("Ivesk langelio y koordinate: ")), int(input("Ivesk langelio x koordinate: ")), int(input("Ivesk langelio y koordinate: ")))
+#         panaikinimas()
+#         kritimas()
+#         ejimuPatikrinimas()
+#         drawBoard(level)
+#         print("The score is :" + " "+str(score))
+#         print(galimiEjimai)
+#     while galimiEjimai == []:
+#         if " " in lygiai[lygis]['lenta']:
+#             for y in range(lygiai[lygis]['dimensions']):
+#                 for x in range(lygiai[lygis]['dimensions']):
+#                     if langelis(x, y) == " ":
+#                         tileGenerate(x, y)
+#         if " " not in lygiai[lygis]['lenta']:
+#           for y in range(lygiai[lygis]['dimensions']):
+#                 for x in range(lygiai[lygis]['dimensions']):
+#                     tileGenerate(x, y)
+#         panaikinimas()
+#         kritimas()
+#         ejimuPatikrinimas()
+#         drawBoard(level)
+#         print(galimiEjimai)
+# if score >= 100:
+#     print("You completed the level!")
